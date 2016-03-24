@@ -4,7 +4,8 @@ Simple receiver.
 
 Receives messages send by the send.py program.
 
-Here is an example that receives messages from any on port 8500.
+Here is an example that receives messages from any IPv4 address on
+port 8500.
 
 Command to open the port:
 
