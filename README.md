@@ -36,6 +36,7 @@ messages over sockets on a single host.
 
    $ # Step 2. Open another terminal window and start receiving
    $ #         messages.
+   $ firewall-cmd --zone=public --add-port=8500/tcp
    $ recv.py 0.0.0.0 8500
 ```
 
