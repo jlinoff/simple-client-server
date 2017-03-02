@@ -2,12 +2,18 @@
 '''
 Simple sender.
 
-Sends messages over a specific port to a host.
+Sends messages over a specific port to a host at periodic intervals.
 
 Here is an example that sends messages to recv_host on port 8500.
 
    $ firewall-cmd --zone=public --add-port=8500/tcp
    $ send.py recv_host 8500
+
+The optional arguments are:
+
+   HOST  - hostname, default 127.0.0.1
+   PORT  - port, default 8500
+   SECS  - seconds to pause, default 1.
 '''
 import datetime
 import json
@@ -55,10 +61,11 @@ def main():
     '''
     host = HOST if len(sys.argv) < 2 else sys.argv[1]
     port = PORT if len(sys.argv) < 3 else int(sys.argv[2])
+    secs = 1 if len(sys.argv) < 4 else float(sys.argv[3])
     while True:
         rec = create_record()
         send(rec, host, port)
-        time.sleep(1)
+        time.sleep(secs)
 
 
 if __name__ == '__main__':

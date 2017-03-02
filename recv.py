@@ -2,7 +2,7 @@
 '''
 Simple receiver.
 
-Receives messages send by the send.py program.
+Receives messages send by the send.py program at periodic intervals.
 
 Here is an example that receives messages from any IPv4 address on
 port 8500.
@@ -11,6 +11,12 @@ Command to open the port:
 
    $ firewall-cmd --zone=public --add-port=8500/tcp
    $ recv.py 0.0.0.0 8500
+
+The optional arguments are:
+
+   HOST  - hostname, default 127.0.0.1
+   PORT  - port, default 8500
+   SECS  - seconds to pause, default 0.200 (200ms).
 '''
 import json
 import socket
@@ -34,7 +40,7 @@ def create_listener(host, port):
     return sock
 
 
-def receive_recs(host, port, pause=0.200):
+def receive_recs(host, port, pause):
     '''
     Poll for records.
     '''
@@ -54,7 +60,8 @@ def main():
     '''
     host = HOST if len(sys.argv) < 2 else sys.argv[1]
     port = PORT if len(sys.argv) < 3 else int(sys.argv[2])
-    receive_recs(host, port)
+    secs = 0.200 if len(sys.argv) < 4 else float(sys.argv[3])
+    receive_recs(host, port, secs)
 
 
 if __name__ == '__main__':
