@@ -1,4 +1,6 @@
 # simple-client-server
+[![Releases](https://img.shields.io/github/release/jlinoff/simple-client-server.svg?style=flat)](https://github.com/jlinoff/simple-client-server/releases)
+
 Very simple client/server example in python 2.x and 3.x.
 
 ## Introduction
