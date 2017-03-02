@@ -5,7 +5,7 @@ Very simple client/server example in python 2.x and 3.x.
 
 ## Introduction
 
-Not too long ago I was talking to a colleague about doing some
+Some time ago I was talking to a colleague about doing some
 network traffic analysis and they suggested setting up a rather
 complex client/server arrangement. I suggested an alternative setup
 using a simple client/server and wrote up this example to show how to
@@ -42,9 +42,9 @@ These are the important program arguments for recv.py. There are others. They ca
 | Short      | Long           | Type   | Default   | Description |
 | ---------- | -------------- | ------ | --------: | ----------- |
 | -h         | --help         |        |           | Print the program help and exit. |
-| -H HOST    | --host HOST    | string | 127.0.0.1 | The host name. |
+| -H HOST    | --host HOST    | string | 0.0.0.0 | The host name. |
 | -p PORT    | --port PORT    | int    | 8500      | The communications port. |
-| -t SECONDS | --time SECONDS | float  | 1.0       | Poll for data every SECONDS seconds. |
+| -t SECONDS | --time SECONDS | float  | 0.200       | Poll for data every SECONDS seconds. |
 | -v         | --verbose      |        |           | Increase the level of verbosity. |
 | -V         | --version      |        |           | Print the program version and exit. |
 
