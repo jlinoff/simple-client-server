@@ -22,17 +22,31 @@ to an IP address on a user specified port.
 The `recv.py` program receives the information sent by the `send.py`
 script.
 
-## Program Arguments
+## send.py Program Arguments
 
-In both programs the first argument is the IP address, the second
-is the port and the third argument is a floating time value for
-seconds.
+These are the important program arguments for send.py. There are others. They can be seen in the help.
 
-| Argument | Type   | Default   | Description |
-| -------- | ------ | --------: | ----------- |
-| _HOST_   | string | 127.0.0.1 | The host name. |
-| _PORT_   | int    | 8500      | The communications port. |
-| _TIME_   | float  | send=1.0<br/>recv=0.200 | The pause interval. |
+| Short      | Long           | Type   | Default   | Description |
+| ---------- | -------------- | ------ | --------: | ----------- |
+| -h         | --help         |        |           | Print the program help and exit. |
+| -H HOST    | --host HOST    | string | 127.0.0.1 | The host name. |
+| -p PORT    | --port PORT    | int    | 8500      | The communications port. |
+| -t SECONDS | --time SECONDS | float  | 1.0       | Send data every SECONDS seconds. |
+| -v         | --verbose      |        |           | Increase the level of verbosity. |
+| -V         | --version      |        |           | Print the program version and exit. |
+
+## recv.py Program Arguments
+
+These are the important program arguments for recv.py. There are others. They can be seen in the help.
+
+| Short      | Long           | Type   | Default   | Description |
+| ---------- | -------------- | ------ | --------: | ----------- |
+| -h         | --help         |        |           | Print the program help and exit. |
+| -H HOST    | --host HOST    | string | 127.0.0.1 | The host name. |
+| -p PORT    | --port PORT    | int    | 8500      | The communications port. |
+| -t SECONDS | --time SECONDS | float  | 1.0       | Poll for data every SECONDS seconds. |
+| -v         | --verbose      |        |           | Increase the level of verbosity. |
+| -V         | --version      |        |           | Print the program version and exit. |
 
 ## Single Host Example
 
@@ -43,12 +57,12 @@ messages over sockets on a single host.
    $ # Step 1. Open a terminal window, update the firewall and
    $ #         start sending messages.
    $ firewall-cmd --zone=public --add-port=8500/tcp
-   $ send.py 127.0.0.1 8500
+   $ send.py --host 127.0.0.1 --port 8500
 
    $ # Step 2. Open another terminal window and start receiving
    $ #         messages.
    $ firewall-cmd --zone=public --add-port=8500/tcp
-   $ recv.py 0.0.0.0 8500
+   $ recv.py --host 0.0.0.0 --port 8500
 ```
 
 ## Two Host Example
@@ -60,12 +74,12 @@ on two different hosts.
    [send_host]$ # Step 1. Open a terminal window on the send host, update
    [send_host]$ #         the firewall and start sending messages.
    [send_host]$ firewall-cmd --zone=public --add-port=8500/tcp
-   [send_host]$ send.py recv_host  8500
+   [send_host]$ send.py --host recv_host --port 8500
 
    [recv_host]$ # Step 2. Open a terminal window on the receive host and
    [recv_host]$ #         start receiving messages.
    [recv_host]$ firewall-cmd --zone=public --add-port=8500/tcp
-   [recv_host]$ recv.py '0.0.0.0'  8500
+   [recv_host]$ recv.py --host 0.0.0.0 --port 8500
 ```
 
 ## Real Life Example
@@ -80,7 +94,7 @@ to make sure that all records were captured.
 ```bash
    $ # receiver
    $ firewall-cmd --zone=public --add-port=8500/tcp
-   $ ./recv.py 0.0.0.0 8500
+   $ ./recv.py --host 0.0.0.0 --port 8500
    RCV: ('10.0.3.16', 51128)  2016-03-24 11:54:50.312326  4pkbqjzjfdflj36s0fxjar9bu0kruova
    RCV: ('10.0.3.16', 51129)  2016-03-24 11:54:51.317053  m6gd0j7zf7tjuo9a45ozj7die7api5dq
    RCV: ('10.0.3.16', 51130)  2016-03-24 11:54:52.320206  3icraxzww4scack7v2ypg1hjeqf2rumh
@@ -95,7 +109,7 @@ This the output from the sender.
 ```bash
    $ # sender
    $ firewall-cmd --zone=public --add-port=8500/tcp
-   $ ./send.py 10.0.3.15 8500
+   $ ./send.py --host 10.0.3.15 --port 8500
    SND: ('10.0.3.15', 8500)  {"data": "4pkbqjzjfdflj36s0fxjar9bu0kruova", "time": "2016-03-24 11:54:50.312326"}
    SND: ('10.0.3.15', 8500)  {"data": "m6gd0j7zf7tjuo9a45ozj7die7api5dq", "time": "2016-03-24 11:54:51.317053"}
    SND: ('10.0.3.15', 8500)  {"data": "3icraxzww4scack7v2ypg1hjeqf2rumh", "time": "2016-03-24 11:54:52.320206"}
