@@ -20,8 +20,17 @@ to an IP address on a user specified port.
 The `recv.py` program receives the information sent by the `send.py`
 script.
 
-In both programs the first argument is the IP address and the second
-is the port.
+## Program Arguments
+
+In both programs the first argument is the IP address, the second
+is the port and the third argument is a floating time value for
+seconds.
+
+| Argument | Type   | Default   | Description |
+| -------- | ------ | --------: | ----------- |
+| _HOST_   | string | 127.0.0.1 | The host name. |
+| _PORT_   | int    | 8500      | The communications port. |
+| _TIME_   | float  | send=1.0<br/>recv=0.200 | The pause interval. |
 
 ## Single Host Example
 
